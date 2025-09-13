@@ -4,7 +4,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only index.ts",
+    "dev": "tsx watch index.ts",
     "start": "tsx watch src/index.ts",
     "build": "tsx src/index.ts"
   },
