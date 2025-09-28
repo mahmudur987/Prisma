@@ -39,13 +39,8 @@ const getAllPosts = async (query: Record<string, string>) => {
   console.log(where);
   const result = await prisma.post.findMany({
     where,
-    select: {
-      id: true,
-      title: true,
-      content: true,
-      isFeatured: true,
-      createdAt: true,
-      updatedAt: true,
+    include: {
+      author: true,
     },
     take: Number(limit),
     skip: (Number(page) - 1) * Number(limit),
@@ -67,7 +62,10 @@ const getAllPosts = async (query: Record<string, string>) => {
 };
 
 const getPostById = async (id: string) => {
-  const result = await prisma.post.findUnique({ where: { id } });
+  const result = await prisma.post.findUnique({
+    where: { id },
+    include: { author: true },
+  });
   return result;
 };
 
